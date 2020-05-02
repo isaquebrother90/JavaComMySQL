@@ -93,6 +93,9 @@ public class TelaClientes extends javax.swing.JInternalFrame {
         txtCliEstado.setText(tblClientes.getModel().getValueAt(setar, 4).toString());
         txtCliFone.setText(tblClientes.getModel().getValueAt(setar, 5).toString());
         txtCliEmail.setText(tblClientes.getModel().getValueAt(setar, 6).toString());
+        // a linha abaixo desabilita o botão adicionar
+        btnAdicionar.setEnabled(false);
+        
     }
     
         // método para alterar registro de clientes
@@ -123,6 +126,7 @@ public class TelaClientes extends javax.swing.JInternalFrame {
                     txtCliEstado.setText(null);
                     txtCliFone.setText(null);
                     txtCliEmail.setText(null);
+                    btnAdicionar.setEnabled(true);
                 }
             }
         } catch (Exception e) {
@@ -131,8 +135,8 @@ public class TelaClientes extends javax.swing.JInternalFrame {
     }
     
     private void remover(){
-        //a a estrutura abaixo confirma a remoção do usuário
-        int confirma = JOptionPane.showConfirmDialog(null,"Tem certeza que deseja remover este usuário?","Atenção",JOptionPane.YES_NO_OPTION);
+        //a a estrutura abaixo confirma a remoção do cliente
+        int confirma = JOptionPane.showConfirmDialog(null,"Tem certeza que deseja remover este cliente?","Atenção",JOptionPane.YES_NO_OPTION);
         if(confirma == JOptionPane.YES_OPTION){
             String sql = "delete from tbclientes where idcli = ?";
             try {
@@ -140,7 +144,7 @@ public class TelaClientes extends javax.swing.JInternalFrame {
                 pst.setString(1,txtCliId.getText());
                 int apagado = pst.executeUpdate();
                 if(apagado > 0){
-                    JOptionPane.showMessageDialog(null, "Usuário removido com sucesso");
+                    JOptionPane.showMessageDialog(null, "Cliente removido com sucesso");
                     txtCliNome.setText(null);
                     txtCliSexo.setText(null);
                     txtCliEndereco.setText(null);

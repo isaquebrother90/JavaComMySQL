@@ -15,7 +15,7 @@ import javax.swing.JOptionPane;
 
 public class TelaUsuario extends javax.swing.JInternalFrame {
 
-        //usando a variável conexão do DAL
+     //usando a variável conexão do DAL
     Connection conexao = null;
     // criando variáveis especiais para conexão com o banco
     // PreparedStatement e ResultSet são frameworks do pacote java.sql
