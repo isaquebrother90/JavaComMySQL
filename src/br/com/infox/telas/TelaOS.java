@@ -7,8 +7,12 @@ package br.com.infox.telas;
 
 import java.sql.*;
 import br.com.infox.dal.ModuloConexao;
+import java.util.HashMap;
 import javax.swing.JOptionPane;
 import net.proteanit.sql.DbUtils;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.view.JasperViewer;
 
 /**
  *
@@ -191,6 +195,25 @@ public class TelaOS extends javax.swing.JInternalFrame {
                     tblClientes.setVisible(true);
 
                 }
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, e);
+            }
+        }
+    }
+
+    // método para imprimir uma os
+    private void imprimir_os() {
+        int confirma = JOptionPane.showConfirmDialog(null, "Confirma a impressão desta OS?", "Atenção", JOptionPane.YES_NO_OPTION);//sistema de confirmação
+        if (confirma == JOptionPane.YES_OPTION) {
+            //emitindo o relatório com o framework JasperReports
+            try {
+                //usando a classe hashmap para criar um filtro
+                HashMap filtro = new HashMap();
+                filtro.put("os", Integer.parseInt(txtOS.getText()));
+                //Usando a classe JasperPrint para preparar a impressão da OS
+                JasperPrint print = JasperFillManager.fillReport("C:/Reports/os.jasper", filtro, conexao);
+                // a linha abaixo exibe o relatório através da classe JasperViewer
+                JasperViewer.viewReport(print, false);
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, e);
             }
@@ -587,7 +610,8 @@ public class TelaOS extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtOsEquipActionPerformed
 
     private void btnOsImprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOsImprimirActionPerformed
-        // TODO add your handling code here:
+        // chamando o método para imprimir uma os
+        imprimir_os();
     }//GEN-LAST:event_btnOsImprimirActionPerformed
 
     private void txtCliPesquisarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCliPesquisarKeyReleased
